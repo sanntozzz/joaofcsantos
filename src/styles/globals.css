@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    @apply m-0 box-border p-0;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent;
+    @apply scroll-smooth;
+}
+
+body {
+    @apply text-black;
+}
+
+/* Scrollbar CSS */
+
+::-webkit-scrollbar {
+    @apply h-1.5 w-1.5;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply rounded-full  bg-primary-300;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-800;
+}
+
+/* Input / Textarea */
+
+input,
+textarea {
+    @apply block w-full rounded-lg bg-primary-800 px-3 py-3 text-sm text-white outline-none placeholder:text-primary-400 aria-required:ring-1 aria-required:ring-destructive;
+}
