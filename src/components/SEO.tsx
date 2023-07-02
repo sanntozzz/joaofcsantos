@@ -14,7 +14,7 @@ function SEO({
     title,
     description = "I'm a student that's passionate about learning more about the whole world of programming.",
     type = 'website',
-    url = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_URL : 'http://localhost:3000',
+    url = process.env.NODE_ENV === 'production' ? 'joaofcsantos.com' : 'localhost:3000',
     image = 'https://raw.githubusercontent.com/sanntozzz/joaofcsantos/main/public/images/OpenGraphImage.jpg',
 }: SEOProps) {
     const pageTitle = title ? [title, SITE_TITLE].join(' | ') : SITE_TITLE
