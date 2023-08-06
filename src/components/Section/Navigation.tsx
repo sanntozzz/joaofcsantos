@@ -1,24 +1,13 @@
-import { Logo } from '@/components/Logo'
-import { Container } from '@/components/Section/Container'
+import { Container } from '@/components/UI/Container'
+import { navLinks } from '@/data'
 import { useEscape } from '@/hooks/useEscape'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { List, X } from 'phosphor-react'
 import { useEffect, useState } from 'react'
-
-type navProps = {
-    href: string
-    text: string
-}[]
-
-const navLinks: navProps = [
-    { href: '#about', text: 'About me' },
-    { href: '#experience', text: 'Experience' },
-    { href: '#education', text: 'Education' },
-    { href: '#skills', text: 'Skills' },
-    { href: '#contact', text: 'Contact me' },
-]
+import logoBlack from '../../../public/logos/Black.svg'
 
 function scrollToSection(event: any, href: string) {
     event.preventDefault()
@@ -52,7 +41,7 @@ function Navigation() {
                     />
                 )}
                 <Link href="/">
-                    <Logo />
+                    <Image src={logoBlack} alt="Logo for João F. C. Santos" className="w-12" draggable="false" />
                 </Link>
                 {width && width >= 1024 && (
                     <div className="space-x-12">
@@ -113,7 +102,7 @@ function OffsideMenu({ menuOpen, setMenuOpen }: Props) {
                                 className="flex-none cursor-pointer text-2xl font-bold text-primary-400 duration-200 hover:text-white"
                                 onClick={() => setMenuOpen(false)}
                             />
-                            <div className="flex grow items-center justify-center py-4">
+                            <div className="flex flex-1 items-center justify-center py-4">
                                 <div className="mx-auto space-y-12">
                                     {navLinks.map(({ href, text }, index) => {
                                         return (

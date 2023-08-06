@@ -1,43 +1,28 @@
-import { Email } from '@/components/Email/Email'
-import { TFormSchema } from '@/components/Section/Contact'
-import { render } from '@react-email/render'
-import { NextApiRequest, NextApiResponse } from 'next'
-import nodemailer from 'nodemailer'
+import EmailTemplate from '@/components/EmailTemplate'
+import { ContactFormData } from '@/types/contactFormProps'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { Resend } from 'resend'
 
-export default async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+export default async function handleSendEmail(req: NextApiRequest, res: NextApiResponse) {
+    const { firstName, lastName, email, subject, message, createdOn }: ContactFormData = req.body
+
     switch (req.method) {
         case 'POST':
-            const { name, email, subject, message, createdOn }: TFormSchema = req.body
-
-            const emailHtml = render(Email({ name, subject, email, message, createdOn }))
-
-            const mailTransporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-                auth: {
-                    user: process.env.NODEMAILER_EMAIL,
-                    pass: process.env.NODEMAILER_PASS,
-                },
-            })
-
             try {
-                await mailTransporter.sendMail({
-                    from: '"João F. C. Santos" <jfilipesantos550@gmail.com>',
+                await resend.sendEmail({
+                    from: 'João F. C. Santos <admin@joaofcsantos.com>',
                     to: email,
-                    cc: 'jfilipesantos550@gmail.com',
-                    subject: 'Message from João F. C. Santos',
-                    html: emailHtml,
+                    subject: subject,
+                    react: EmailTemplate({ firstName, lastName, email, createdOn, message, subject }),
                 })
+                return res.status(200).json({ success: 'Sent successfully' })
             } catch (err) {
-                res.status(500).json({ message: 'Something went wrong' })
-                break
+                return res.status(500).json({ error: 'Something went wrong, please try again.' })
             }
 
-            res.status(200).json({ message: 'Sent successfully' })
-            break
         default:
-            res.status(405).json({ message: 'Method not allowed' })
-            break
+            return res.status(405).json({ error: 'Method not allowed' })
     }
 }

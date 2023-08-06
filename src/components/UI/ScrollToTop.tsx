@@ -7,7 +7,7 @@ function ScrollToTop() {
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 50) {
+            if (window.scrollY >= 50) {
                 setShowButton(true)
             } else {
                 setShowButton(false)

@@ -1,5 +1,5 @@
-import { Container } from '@/components/Section/Container'
 import { Button } from '@/components/UI/Button'
+import { Container } from '@/components/UI/Container'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { FilePdf } from 'phosphor-react'

@@ -1,31 +1,16 @@
-import { Container } from '@/components/Section/Container'
 import { Button } from '@/components/UI/Button'
+import { Container } from '@/components/UI/Container'
 import { FormDescription } from '@/components/UI/FormDescription'
 import { FormItem } from '@/components/UI/FormItem'
 import { FormLabel } from '@/components/UI/FormLabel'
 import { FormMessage } from '@/components/UI/FormMessage'
 import { Input } from '@/components/UI/Input'
 import { Textarea } from '@/components/UI/Textarea'
+import { ContactFormData, ContactFormValidator } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-import * as z from 'zod'
-
-const formSchema = z
-    .object({
-        name: z.string().nonempty('This field is required').min(2, { message: 'Must be 2 or more characters long' }),
-        email: z.string().nonempty('This field is required').email({ message: 'Invalid email address' }),
-        subject: z.string().nonempty('This field is required').min(5, { message: 'Must be 5 or more characters long' }),
-        message: z
-            .string()
-            .nonempty('This field is required')
-            .min(10, { message: 'Must be 10 or more characters long' }),
-        createdOn: z.date().default(() => new Date()),
-    })
-    .required()
-
-type TFormSchema = z.infer<typeof formSchema>
 
 function Contact() {
     const {
@@ -33,17 +18,16 @@ function Contact() {
         handleSubmit,
         reset,
         formState: { errors, isSubmitting },
-    } = useForm<TFormSchema>({ resolver: zodResolver(formSchema) })
+    } = useForm<ContactFormData>({ resolver: zodResolver(ContactFormValidator) })
 
-    async function onSubmit(values: TFormSchema) {
+    const onSubmit = async (values: ContactFormData) => {
         toast.remove()
-
         try {
             await axios.post('api/sendEmail', values)
             toast.success('Sent successfully')
             reset()
         } catch (err) {
-            toast.error('Something went wrong')
+            toast.error('Something went wrong, please try again.')
         }
     }
 
@@ -56,22 +40,30 @@ function Contact() {
             <form className="mx-auto flex max-w-screen-md flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-4 md:grid-cols-2">
                     <FormItem>
-                        <FormLabel htmlFor="name" required>
-                            Name
+                        <FormLabel htmlFor="firstName" required>
+                            First Name
                         </FormLabel>
-                        <Input id="name" {...register('name')} errors={errors.name} />
-                        <FormDescription>This is your full name.</FormDescription>
-                        <FormMessage>{errors.name?.message}</FormMessage>
+                        <Input id="firstName" {...register('firstName')} errors={errors.firstName} />
+                        <FormDescription>This is your first name.</FormDescription>
+                        <FormMessage>{errors.firstName?.message}</FormMessage>
                     </FormItem>
                     <FormItem>
-                        <FormLabel htmlFor="email" required>
-                            Email
+                        <FormLabel htmlFor="lastName" required>
+                            Last Name
                         </FormLabel>
-                        <Input id="email" {...register('email')} errors={errors.email} />
-                        <FormDescription>This is your email address.</FormDescription>
-                        <FormMessage>{errors.email?.message}</FormMessage>
+                        <Input id="lastName" {...register('lastName')} errors={errors.lastName} />
+                        <FormDescription>This is your last name.</FormDescription>
+                        <FormMessage>{errors.lastName?.message}</FormMessage>
                     </FormItem>
                 </div>
+                <FormItem>
+                    <FormLabel htmlFor="email" required>
+                        Email
+                    </FormLabel>
+                    <Input id="email" {...register('email')} errors={errors.email} />
+                    <FormDescription>This is your email address.</FormDescription>
+                    <FormMessage>{errors.email?.message}</FormMessage>
+                </FormItem>
                 <FormItem>
                     <FormLabel htmlFor="subject" required>
                         Subject
@@ -97,4 +89,3 @@ function Contact() {
 }
 
 export { Contact }
-export type { TFormSchema }

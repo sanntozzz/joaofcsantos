@@ -1,27 +1,6 @@
-import { Container } from '@/components/Section/Container'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/UI/Accordion'
-
-type listProps = {
-    job: string
-    location: string
-    date: string
-    content: string[]
-}
-
-const listItems: listProps[] = [
-    {
-        job: 'Curricular Internship',
-        location: 'Direção-Geral dos Estabelecimentos Escolares',
-        date: 'March 2020 - August 2020',
-        content: ['Development of a school information management system;', 'Helpdesk.'],
-    },
-    {
-        job: 'Curricular Internship',
-        location: 'Direção-Geral dos Estabelecimentos Escolares',
-        date: 'February 2018 - July 2018',
-        content: ['Development of a messaging application;', 'Office 365 Administration;', 'Helpdesk.'],
-    },
-]
+import { Container } from '@/components/UI/Container'
+import { experienceData } from '@/data/experienceData'
 
 function Experience() {
     return (
@@ -31,7 +10,7 @@ function Experience() {
                 <p className="text-xl font-bold tracking-[0.5em] text-white">Work Experience</p>
             </div>
             <Accordion>
-                {listItems.map(({ job, location, date, content }, index) => {
+                {experienceData.map(({ job, location, date, content }, index) => {
                     return (
                         <AccordionItem key={index} value={index.toString()}>
                             <AccordionTrigger value={index.toString()}>

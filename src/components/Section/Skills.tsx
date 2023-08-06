@@ -1,40 +1,5 @@
-import { Container } from '@/components/Section/Container'
-import { IconType } from 'react-icons/lib'
-import {
-    SiCss3,
-    SiFigma,
-    SiGit,
-    SiGithub,
-    SiHtml5,
-    SiJavascript,
-    SiMicrosoftsqlserver,
-    SiMysql,
-    SiNextdotjs,
-    SiPostgresql,
-    SiPrisma,
-    SiReact,
-    SiTailwindcss,
-    SiTypescript,
-} from 'react-icons/si'
-
-type skillProps = { icon: IconType; text: string }[]
-
-const skillsData: skillProps = [
-    { icon: SiHtml5, text: 'HTML' },
-    { icon: SiCss3, text: 'CSS' },
-    { icon: SiJavascript, text: 'JavaScript' },
-    { icon: SiTypescript, text: 'TypeScript' },
-    { icon: SiReact, text: 'React' },
-    { icon: SiNextdotjs, text: 'Next.js' },
-    { icon: SiTailwindcss, text: 'Tailwind CSS' },
-    { icon: SiMysql, text: 'MySQL' },
-    { icon: SiMicrosoftsqlserver, text: 'SQL Server' },
-    { icon: SiPostgresql, text: 'PostgreSQL' },
-    { icon: SiPrisma, text: 'Prisma' },
-    { icon: SiGit, text: 'Git' },
-    { icon: SiGithub, text: 'GitHub' },
-    { icon: SiFigma, text: 'Figma' },
-]
+import { Container } from '@/components/UI/Container'
+import { skillsData } from '@/data'
 
 function Skills() {
     return (
@@ -48,7 +13,9 @@ function Skills() {
                     const Icon = icon
                     return (
                         <div key={i} className="space-y-4">
-                            <Icon size={36} className="mx-auto" />
+                            <div>
+                                <Icon size={36} className="mx-auto" />
+                            </div>
                             <p className="text-center text-sm">{text}</p>
                         </div>
                     )

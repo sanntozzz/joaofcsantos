@@ -1,0 +1,5 @@
+export { ContactFormValidator } from './contactFormProps'
+export type { ContactFormData } from './contactFormProps'
+export type { educationProps } from './educationProps'
+export type { experienceProps } from './experienceProps'
+export type { socialProps } from './socialProps'
