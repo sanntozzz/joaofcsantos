@@ -14,7 +14,7 @@ export function EmailTemplate({ firstName, createdOn, email, lastName, message, 
     return (
         <Html>
             <Head />
-            <Preview>{subject}</Preview>
+            <Preview>{message}</Preview>
             <Tailwind>
                 <Body className="bg-white font-sans text-primary-900">
                     <Container className="m-auto p-4">

@@ -1,4 +1,9 @@
-import { experienceProps } from '@/types/experienceProps'
+type experienceProps = {
+    job: string
+    location: string
+    date: string
+    content: string[]
+}
 
 const experienceData: experienceProps[] = [
     {

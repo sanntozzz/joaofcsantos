@@ -8,8 +8,6 @@ type SEOProps = {
     image?: string
 }
 
-const SITE_TITLE = 'João F. C. Santos'
-
 function SEO({
     title,
     description = "I'm a student that's passionate about learning more about the whole world of programming.",
@@ -17,6 +15,8 @@ function SEO({
     url = process.env.NODE_ENV === 'production' ? 'joaofcsantos.com' : 'localhost:3000',
     image = 'https://raw.githubusercontent.com/sanntozzz/joaofcsantos/main/public/images/OpenGraphImage.jpg',
 }: SEOProps) {
+    const SITE_TITLE = 'João F. C. Santos'
+
     const pageTitle = title ? [title, SITE_TITLE].join(' | ') : SITE_TITLE
 
     const metaTags = [
@@ -33,17 +33,23 @@ function SEO({
         { name: 'twitter:image', content: image },
     ].filter(Boolean)
 
+    const linkTags = [
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+    ].filter(Boolean)
+
     return (
         <Head>
             <title>{pageTitle}</title>
             {metaTags.map(({ name, property, content }) => (
                 <meta key={name || property} name={name} property={property} content={content} />
             ))}
-            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-            <link rel="icon" type="image/png" href="/favicon.ico" />
-            <link rel="manifest" href="/site.webmanifest" />
+
+            {linkTags.map(({ rel, type, sizes, href }) => (
+                <link key={rel} rel={rel} type={type} sizes={sizes} href={href} />
+            ))}
         </Head>
     )
 }

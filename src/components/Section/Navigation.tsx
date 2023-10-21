@@ -33,7 +33,7 @@ function Navigation() {
     return (
         <>
             <Container className="flex justify-between p-4">
-                {width && width <= 1024 && (
+                {width && width < 1024 && (
                     <List
                         weight="bold"
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -71,7 +71,7 @@ type Props = {
 function OffsideMenu({ menuOpen, setMenuOpen }: Props) {
     const { width } = useWindowSize()
 
-    if (menuOpen && width && width >= 1024) {
+    if (menuOpen && width && width > 1024) {
         setMenuOpen(false)
     }
 

@@ -3,18 +3,18 @@ import { Container } from '@/components/UI/Container'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { FilePdf } from 'phosphor-react'
-import Avatar from '../../../public/images/Avatar.png'
+import Avatar from '../../../public/images/Me.svg'
 
 function Header() {
     return (
         <Container id="about">
-            <div className="grid-flow-col items-center gap-12 space-y-8 lg:grid">
+            <div className="flex flex-col items-center gap-12 space-y-8 md:flex-row">
                 <AnimatePresence>
                     <motion.div
                         initial={{ x: '-100%', opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 1 }}
-                        className="space-y-8"
+                        className="flex-1 space-y-8"
                     >
                         <p className="text-xl uppercase tracking-[1em]">My name is</p>
                         <p className="text-4xl font-bold uppercase tracking-[0.5em]">
@@ -43,11 +43,12 @@ function Header() {
                         initial={{ opacity: 0, scale: 1.25 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1 }}
+                        className="w-full flex-[0.50]"
                     >
                         <Image
                             src={Avatar}
                             alt="Owner of João F. C. Santos"
-                            className="mx-auto w-full max-w-xs md:max-w-md"
+                            className="mx-auto md:w-full"
                             draggable="false"
                             priority
                         />

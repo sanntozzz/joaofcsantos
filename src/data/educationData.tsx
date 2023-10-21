@@ -1,4 +1,8 @@
-import { educationProps } from '@/types/educationProps'
+type educationProps = {
+    school: string
+    course: string
+    date: string
+}[]
 
 const educationData: educationProps = [
     {
