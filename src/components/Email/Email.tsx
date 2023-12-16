@@ -18,7 +18,7 @@ const Email = ({ name, subject, createdOn, email, message }: TFormSchema) => {
                 <Body className="bg-white font-sans text-primary-900">
                     <Container className="m-auto p-4">
                         <Text>
-                            Thanks for contacting me, <span className="font-bold">{name}</span>!
+                            sThanks for contacting me, <span className="font-bold">{name}</span>!
                         </Text>
                         <Text>This is the message you submitted:</Text>
                         <Text className="w-full rounded-lg bg-primary-100 p-4">{message}</Text>
