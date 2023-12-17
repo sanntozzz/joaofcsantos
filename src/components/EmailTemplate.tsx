@@ -1,4 +1,5 @@
-import { ContactFormData } from '@/types/contactFormProps'
+
+import { ContactFormData } from '@/lib/contactFormValidator'
 import { Body } from '@react-email/body'
 import { Container } from '@react-email/container'
 import { Head } from '@react-email/head'
@@ -19,7 +20,7 @@ export function EmailTemplate({ firstName, createdOn, email, lastName, message, 
                 <Body className="bg-white font-sans text-primary-900">
                     <Container className="m-auto p-4">
                         <Text>
-                            Thanks for contacting me,{' '}
+                            sThanks for contacting me,{' '}
                             <span className="font-bold">{[firstName, lastName].join(' ')}</span>.
                         </Text>
                         <Text>This is the message you submitted:</Text>
